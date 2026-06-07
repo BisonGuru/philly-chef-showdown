@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Philly Chef Showdown</title>
+<meta name="description" content="Get in touch with the Philly Chef Showdown team — applications, sponsorship, press, and general inquiries." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat+Brush&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Philly Chef Showdown home">
+      <img src="logo.png" alt="Philly Chef Showdown" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <span class="logo-fallback" style="display:none;">
+        <span>PHILLY CHEF SHOWDOWN</span>
+        <span class="sm">★ CULINARY COMPETITION ★</span>
+      </span>
+    </a>
+    <button class="menu-toggle" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="apply.html">Chef Registration</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="america250.html">America 250</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="apply.html" class="cta">Get Tickets</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ====== PAGE HERO ====== -->
+<section class="page-hero contact">
+  <div class="container">
+    <span class="crumbs">★ Contact ★</span>
+    <h1>Let's Talk.</h1>
+    <p>Whether you're competing, sponsoring, covering the event, or just hungry — we want to hear from you.</p>
+  </div>
+</section>
+
+<!-- ====== CONTACT GRID ====== -->
+<section class="food-bg dots-overlay">
+  <span class="watermark" aria-hidden="true">HELLO</span>
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">get in touch</span>
+      <h2>Send Us a Message.</h2>
+      <p>For applications, sponsorship, press, or general questions — pick the team member best suited and we'll respond within 2 business days.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>The Team</h3>
+        <p>Co-produced by Philly's own. Reach out directly.</p>
+        <div class="contact-person">
+          <div class="role">Co-Producer · MYB</div>
+          <div class="name">Tanya T. Morris</div>
+          <a href="mailto:tanya@momyourbusiness.com">tanya@momyourbusiness.com</a>
+          <a href="tel:+12677704002">267-770-4002</a>
+          <a href="tel:+18005244934">800.524.4934</a>
+        </div>
+        <div class="contact-person">
+          <div class="role">Co-Producer · Katika</div>
+          <div class="name">Jason M. Coles</div>
+          <a href="mailto:jason@katika.us">jason@katika.us</a>
+        </div>
+        <div class="contact-person">
+          <div class="role">General Inquiries</div>
+          <a href="mailto:info@momyourbusiness.com">info@momyourbusiness.com</a>
+          <a href="mailto:info@katika.us">info@katika.us</a>
+        </div>
+        <div class="contact-person">
+          <div class="role">Follow Along</div>
+          <a href="https://instagram.com/momyourbusiness" target="_blank">@momyourbusiness</a>
+          <a href="https://instagram.com/katika_app" target="_blank">@katika_app</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.confirm').hidden = false;">
+        <div class="field">
+          <label>I'm reaching out about <span class="req">*</span></label>
+          <select required>
+            <option value="">Select one…</option>
+            <option>Competing in the Showdown</option>
+            <option>Sponsorship opportunities</option>
+            <option>Press &amp; media</option>
+            <option>Volunteering</option>
+            <option>Tickets &amp; attendance</option>
+            <option>General question</option>
+          </select>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label>Name <span class="req">*</span></label>
+            <input type="text" required />
+          </div>
+          <div class="field">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" required />
+          </div>
+        </div>
+        <div class="field">
+          <label>Business or Organization</label>
+          <input type="text" />
+        </div>
+        <div class="field">
+          <label>How can we help? <span class="req">*</span></label>
+          <textarea required></textarea>
+        </div>
+        <div class="field">
+          <div class="checks">
+            <label><input type="checkbox" /> Sign me up for the MYB &amp; Katika newsletter — Showdown updates, neighborhood events, and Philly food stories.</label>
+          </div>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="cta">Send Message</button>
+          <p class="confirm" hidden style="margin-top:18px;color:var(--red);font-family:'Caveat Brush',cursive;font-size:1.4rem;">Thanks — we'll be in touch soon!</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ====== NEWSLETTER STRIP ====== -->
+<section class="form-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">stay connected</span>
+      <h2>Don't Miss a Bite.</h2>
+      <p>Tasting Tour announcements, finalist reveals, and behind-the-scenes from Philly's biggest food competition.</p>
+    </div>
+    <form style="max-width:560px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:3;" onsubmit="event.preventDefault(); this.querySelector('.ok').hidden=false;">
+      <input type="email" placeholder="your@email.com" required style="flex:1;min-width:240px;background:#fff;border:3px solid var(--navy);border-radius:999px;padding:14px 22px;font-family:'Fredoka',sans-serif;font-size:1rem;color:var(--navy);" />
+      <button type="submit" class="cta">Subscribe</button>
+      <p class="ok" hidden style="width:100%;text-align:center;color:var(--red);font-family:'Caveat Brush',cursive;font-size:1.4rem;margin:8px 0 0;">You're in. Welcome to the table.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <img src="logo.png" alt="Philly Chef Showdown" class="foot-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block';" />
+        <span class="foot-logo" style="display:none;"><span class="red">Philly Chef</span><br>Showdown</span>
+        <p>Philadelphia's premier culinary pitch competition. Presented by Mom Your Business × Katika.</p>
+        <div class="socials">
+          <a href="https://instagram.com/momyourbusiness" aria-label="Instagram">IG</a>
+          <a href="https://instagram.com/katika_app" aria-label="Katika Instagram">K</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="LinkedIn">LI</a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="apply.html">Chef Registration</a></li>
+          <li><a href="sponsors.html">Sponsors</a></li>
+          <li><a href="america250.html">America 250</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Event</h4>
+        <ul>
+          <li>Oct 24, 2026</li>
+          <li>Doors 12 PM &ndash; 8 PM</li>
+          <li>2300 Arena</li>
+          <li>South Philadelphia</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@momyourbusiness.com">info@momyourbusiness.com</a></li>
+          <li><a href="mailto:info@katika.us">info@katika.us</a></li>
+          <li><a href="tel:+18005244934">800.524.4934</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2026 Philly Chef Showdown · Presented by Mom Your Business × Katika
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const links = document.getElementById('navLinks');
+  btn.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    btn.textContent = isOpen ? '✕' : '☰';
+  });
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (links.classList.contains('open')) {
+        links.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = '☰';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
