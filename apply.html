@@ -131,7 +131,12 @@
       <p>All fields marked <span style="color:var(--red);font-weight:800;">*</span> are required. Applications are reviewed on a rolling basis.</p>
     </div>
 
-    <form class="application" onsubmit="event.preventDefault(); document.getElementById('thanks').scrollIntoView({behavior:'smooth'}); document.getElementById('thanks').hidden=false;">
+    <form class="application" method="POST" action="submit.php" novalidate>
+
+      <!-- Honeypot: bots fill this; humans don't see it -->
+      <div style="position:absolute;left:-9999px;height:0;overflow:hidden;" aria-hidden="true">
+        <label>Website URL (leave blank) <input type="text" name="website_url_confirm" tabindex="-1" autocomplete="off" /></label>
+      </div>
 
       <!-- SECTION A -->
       <div class="app-section">
@@ -141,33 +146,33 @@
         <div class="two-col">
           <div class="field">
             <label>Full Name <span class="req">*</span></label>
-            <input type="text" required />
+            <input type="text" name="full_name" required />
           </div>
           <div class="field">
             <label>Business Name <span class="req">*</span></label>
-            <input type="text" required />
+            <input type="text" name="business_name" required />
           </div>
         </div>
 
         <div class="field">
           <label>Business Type <span class="req">*</span></label>
           <div class="options">
-            <label><input type="radio" name="biztype" required /><span>Chef / Personal Chef</span></label>
-            <label><input type="radio" name="biztype" /><span>Food Truck</span></label>
-            <label><input type="radio" name="biztype" /><span>Caterer</span></label>
-            <label><input type="radio" name="biztype" /><span>Small Business Restaurant</span></label>
-            <label><input type="radio" name="biztype" /><span>Other</span></label>
+            <label><input type="radio" name="business_type" value="Chef / Personal Chef" required /><span>Chef / Personal Chef</span></label>
+            <label><input type="radio" name="business_type" value="Food Truck" /><span>Food Truck</span></label>
+            <label><input type="radio" name="business_type" value="Caterer" /><span>Caterer</span></label>
+            <label><input type="radio" name="business_type" value="Small Business Restaurant" /><span>Small Business Restaurant</span></label>
+            <label><input type="radio" name="business_type" value="Other" /><span>Other</span></label>
           </div>
         </div>
 
         <div class="two-col">
           <div class="field">
             <label>Philadelphia Neighborhood <span class="req">*</span></label>
-            <input type="text" placeholder="e.g. Germantown, Kensington, West Philly" required />
+            <input type="text" name="neighborhood" placeholder="e.g. Germantown, Kensington, West Philly" required />
           </div>
           <div class="field">
             <label>Years Operating <span class="req">*</span></label>
-            <select required>
+            <select name="years_operating" required>
               <option value="">Select one…</option>
               <option>Less than 1 year</option>
               <option>1–2 years</option>
@@ -180,17 +185,17 @@
         <div class="two-col">
           <div class="field">
             <label>Phone Number <span class="req">*</span></label>
-            <input type="tel" required />
+            <input type="tel" name="phone" required />
           </div>
           <div class="field">
             <label>Email Address <span class="req">*</span></label>
-            <input type="email" required />
+            <input type="email" name="email" required />
           </div>
         </div>
 
         <div class="field">
           <label>Website or Social Media Handle</label>
-          <input type="url" placeholder="https:// or @handle" />
+          <input type="text" name="website" placeholder="https:// or @handle" />
         </div>
       </div>
 
@@ -201,25 +206,25 @@
 
         <div class="field">
           <label>Describe your food business and what makes it unique. What's your story? <span class="req">*</span></label>
-          <textarea required maxlength="2000"></textarea>
+          <textarea name="business_story" required maxlength="2000"></textarea>
           <span class="help">250 words max.</span>
         </div>
 
         <div class="field">
           <label>What cuisine or food category best describes what you cook? <span class="req">*</span></label>
-          <textarea required maxlength="500"></textarea>
+          <textarea name="cuisine" required maxlength="500"></textarea>
           <span class="help">Examples: Soul Food / Southern, Caribbean, Vegan / Plant-Based, Baked Goods / Pastry, Fusion, Seafood, etc.</span>
         </div>
 
         <div class="field">
           <label>What dish or menu item would you bring to the Showdown, and why? <span class="req">*</span></label>
-          <textarea required maxlength="1500"></textarea>
+          <textarea name="signature_dish" required maxlength="1500"></textarea>
           <span class="help">150 words max.</span>
         </div>
 
         <div class="field">
           <label>Why does Philadelphia need to taste your food? <span class="req">*</span></label>
-          <textarea required maxlength="1500"></textarea>
+          <textarea name="philly_pitch" required maxlength="1500"></textarea>
           <span class="help">150 words max. This is your pitch — make it count.</span>
         </div>
       </div>
@@ -232,23 +237,23 @@
         <div class="field">
           <label>Do you hold a valid City of Philadelphia Commercial Activity License? <span class="req">*</span></label>
           <div class="options">
-            <label><input type="radio" name="cal" required /><span>Yes</span></label>
-            <label><input type="radio" name="cal" /><span>No</span></label>
-            <label><input type="radio" name="cal" /><span>Applied / Pending</span></label>
+            <label><input type="radio" name="has_license" value="Yes" required /><span>Yes</span></label>
+            <label><input type="radio" name="has_license" value="No" /><span>No</span></label>
+            <label><input type="radio" name="has_license" value="Applied / Pending" /><span>Applied / Pending</span></label>
           </div>
         </div>
         <div class="note">A valid Commercial Activity License is required to compete. If pending, please provide your application reference number below.</div>
 
         <div class="field">
           <label>Commercial Activity License Number (if applicable)</label>
-          <input type="text" />
+          <input type="text" name="license_number" />
         </div>
 
         <div class="field">
           <label>Are you current on all City of Philadelphia taxes? <span class="req">*</span></label>
           <div class="options">
-            <label><input type="radio" name="tax" required /><span>Yes</span></label>
-            <label><input type="radio" name="tax" /><span>No</span></label>
+            <label><input type="radio" name="tax_compliant" value="Yes" required /><span>Yes</span></label>
+            <label><input type="radio" name="tax_compliant" value="No" /><span>No</span></label>
           </div>
         </div>
         <div class="note">Tax compliance is required to compete. Applications from non-compliant businesses will not be considered.</div>
@@ -256,14 +261,14 @@
         <div class="field">
           <label>Is your business primarily based in or serving an underserved Philadelphia neighborhood? <span class="req">*</span></label>
           <div class="options">
-            <label><input type="radio" name="underserved" required /><span>Yes</span></label>
-            <label><input type="radio" name="underserved" /><span>No</span></label>
+            <label><input type="radio" name="serves_underserved" value="Yes" required /><span>Yes</span></label>
+            <label><input type="radio" name="serves_underserved" value="No" /><span>No</span></label>
           </div>
         </div>
 
         <div class="field">
           <div class="checks">
-            <label><input type="checkbox" required /> I certify that all information provided in this application is accurate and complete. <span class="req">*</span></label>
+            <label><input type="checkbox" name="certify" value="Yes" required /> I certify that all information provided in this application is accurate and complete. <span class="req">*</span></label>
           </div>
         </div>
       </div>
@@ -276,24 +281,24 @@
         <div class="field">
           <label>Which Qualifying Tasting Tour stop(s) are you available to attend? <span class="req">*</span></label>
           <div class="checks">
-            <label><input type="checkbox" /> Stop 1 — North Philadelphia (Venue TBD) · September 8, 2026</label>
-            <label><input type="checkbox" /> Stop 2 — Old City (Venue TBD) · September 15, 2026</label>
-            <label><input type="checkbox" /> Stop 3 — West Philadelphia (Venue TBD) · September 22, 2026</label>
+            <label><input type="checkbox" name="tour_stops[]" value="Stop 1 — North Philly · Sep 8" /> Stop 1 — North Philadelphia (Venue TBD) · September 8, 2026</label>
+            <label><input type="checkbox" name="tour_stops[]" value="Stop 2 — Old City · Sep 15" /> Stop 2 — Old City (Venue TBD) · September 15, 2026</label>
+            <label><input type="checkbox" name="tour_stops[]" value="Stop 3 — West Philly · Sep 22" /> Stop 3 — West Philadelphia (Venue TBD) · September 22, 2026</label>
           </div>
         </div>
 
         <div class="field">
           <label>Do you have access to the equipment needed to prepare and present your dish? <span class="req">*</span></label>
           <div class="options">
-            <label><input type="radio" name="equip" required /><span>Yes</span></label>
-            <label><input type="radio" name="equip" /><span>No</span></label>
-            <label><input type="radio" name="equip" /><span>I need assistance — please contact me</span></label>
+            <label><input type="radio" name="has_equipment" value="Yes" required /><span>Yes</span></label>
+            <label><input type="radio" name="has_equipment" value="No" /><span>No</span></label>
+            <label><input type="radio" name="has_equipment" value="Need assistance" /><span>I need assistance — please contact me</span></label>
           </div>
         </div>
 
         <div class="field">
           <label>Is there anything we should know about your participation needs or accommodations required?</label>
-          <textarea></textarea>
+          <textarea name="participation_notes"></textarea>
           <span class="help">Optional.</span>
         </div>
       </div>
@@ -305,7 +310,7 @@
 
         <div class="field">
           <label>How did you hear about the Philly Chef Showdown?</label>
-          <select>
+          <select name="referral_source">
             <option value="">Select one…</option>
             <option>MYB Newsletter</option>
             <option>Katika App / Platform</option>
@@ -318,7 +323,7 @@
 
         <div class="field">
           <label>Is there anything else you'd like us to know about you or your business?</label>
-          <textarea maxlength="1500"></textarea>
+          <textarea name="additional_info" maxlength="1500"></textarea>
           <span class="help">Optional · 150 words max.</span>
         </div>
       </div>
@@ -329,13 +334,20 @@
       </div>
     </form>
 
-    <!-- Submission confirmation (hidden until submit) -->
+    <!-- Submission confirmation (shown after submit.php redirects with ?status=ok) -->
     <div id="thanks" hidden style="max-width:880px;margin:48px auto 0;background:var(--navy);color:#fff;border-radius:18px;padding:36px 32px;border:3px solid var(--orange);box-shadow:6px 6px 0 var(--orange);">
       <h3 style="font-family:'Alfa Slab One',sans-serif;color:var(--yellow);margin-bottom:12px;">Your Application Has Been Received!</h3>
       <p style="color:rgba(255,255,255,0.85);">Thank you for applying to the Philly Chef Showdown. Our team will review your application carefully. Applications are reviewed on a rolling basis — selected applicants will be contacted with their Tasting Tour stop assignment and next steps.</p>
-      <p style="color:rgba(255,255,255,0.85);margin-bottom:0;">Questions? Reach out to <a href="mailto:info@momyourbusiness.com" style="color:var(--yellow);font-weight:700;">info@momyourbusiness.com</a>.</p>
+      <p style="color:rgba(255,255,255,0.85);margin-bottom:0;">Check your inbox for a confirmation email. Questions? Reach out to <a href="mailto:info@momyourbusiness.com" style="color:var(--yellow);font-weight:700;">info@momyourbusiness.com</a>.</p>
       <p style="font-family:'Caveat Brush',cursive;color:var(--orange);font-size:1.5rem;margin-top:18px;">Philly, what do you want to taste? — The MYB &amp; Katika Team</p>
     </div>
+    <script>
+      // Reveal confirmation banner if redirected from submit.php
+      if (new URLSearchParams(window.location.search).get('status') === 'ok') {
+        var t = document.getElementById('thanks');
+        if (t) { t.hidden = false; setTimeout(function(){ t.scrollIntoView({behavior:'smooth'}); }, 80); }
+      }
+    </script>
   </div>
 </section>
 
