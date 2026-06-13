@@ -1432,3 +1432,183 @@
   font-size: 1.4rem;
 }
 .presented-by .x { color: var(--orange); font-family: 'Alfa Slab One', sans-serif; font-size: 1.6rem; }
+
+/* ========= COMPETITION CATEGORIES ========= */
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  position: relative; z-index: 3;
+}
+.cat-card {
+  background: #fff;
+  border: 3px solid var(--navy);
+  border-radius: 18px;
+  padding: 32px 28px 30px;
+  box-shadow: 6px 6px 0 var(--navy);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.cat-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--navy); }
+.cat-card .cat-tag {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Alfa Slab One', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.cat-card:nth-child(2) .cat-tag { background: var(--orange); }
+.cat-card:nth-child(3) .cat-tag { background: var(--yellow); color: var(--navy); }
+.cat-card:nth-child(4) .cat-tag { background: var(--navy); color: var(--yellow); }
+.cat-card .cat-name {
+  font-family: 'Alfa Slab One', sans-serif;
+  color: var(--navy);
+  font-size: 1.7rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.cat-card .subs {
+  font-family: 'Caveat Brush', cursive;
+  color: var(--red);
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+}
+.cat-card .subs .sep { color: var(--orange); margin: 0 6px; }
+.cat-card p { color: var(--muted); margin: 0; font-size: 0.95rem; }
+@media (max-width: 760px) { .cat-grid { grid-template-columns: 1fr; } }
+
+/* ========= ENTRY FEE NOTICE ========= */
+.fee-notice { padding: 60px 0; }
+.fee-card {
+  display: flex; gap: 28px;
+  align-items: center;
+  background: #fff;
+  border: 3px solid var(--orange);
+  border-radius: 22px;
+  padding: 32px 36px;
+  box-shadow: 8px 8px 0 var(--orange);
+  max-width: 920px;
+  margin: 0 auto;
+  position: relative; z-index: 3;
+}
+.fee-card .fee-icon {
+  flex-shrink: 0;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  display: grid; place-items: center;
+  font-family: 'Alfa Slab One', sans-serif;
+  font-size: 1.9rem;
+  border: 4px solid var(--navy);
+  box-shadow: 4px 4px 0 var(--navy);
+  letter-spacing: -1px;
+}
+.fee-card .fee-body h3 {
+  font-family: 'Alfa Slab One', sans-serif;
+  color: var(--navy);
+  font-size: 1.35rem;
+  margin: 0 0 8px;
+}
+.fee-card .fee-body p { color: var(--muted); margin: 0; line-height: 1.55; }
+.fee-card .fee-body a {
+  color: var(--red); font-weight: 700;
+  border-bottom: 2px solid currentColor; padding-bottom: 1px;
+}
+@media (max-width: 700px) {
+  .fee-card { flex-direction: column; text-align: center; padding: 28px 24px; }
+}
+
+/* ========= TICKET TIERS (VIP / GA) ========= */
+.ticket-tiers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  max-width: 960px;
+  margin: 70px auto 90px;
+  position: relative; z-index: 3;
+}
+.ticket-card {
+  background: #fff;
+  border: 4px solid var(--navy);
+  border-radius: 22px;
+  padding: 36px 32px 32px;
+  box-shadow: 8px 8px 0 var(--navy);
+  display: flex; flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.ticket-card.vip {
+  background: var(--navy);
+  color: #fff;
+}
+.ticket-card.vip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url('food-pattern.svg');
+  background-size: 320px auto;
+  opacity: 0.07;
+  pointer-events: none;
+}
+.ticket-card.vip > * { position: relative; z-index: 2; }
+.ticket-card .ticket-tag {
+  display: inline-block;
+  font-family: 'Caveat Brush', cursive;
+  color: var(--red);
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+.ticket-card.vip .ticket-tag { color: var(--yellow); }
+.ticket-card .ticket-badge {
+  position: absolute;
+  top: 14px; right: 18px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-family: 'Alfa Slab One', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 2px solid var(--navy);
+}
+.ticket-card .ticket-price {
+  font-family: 'Alfa Slab One', sans-serif;
+  color: var(--navy);
+  font-size: 3.4rem;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+.ticket-card.vip .ticket-price { color: var(--yellow); text-shadow: 3px 3px 0 #000; font-size: 4rem; }
+.ticket-card .ticket-price small {
+  display: block;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 8px;
+}
+.ticket-card.vip .ticket-price small { color: rgba(255,255,255,0.7); }
+.ticket-card ul { list-style: none; padding: 0; margin: 0 0 22px; flex: 1; }
+.ticket-card ul li {
+  position: relative;
+  padding: 8px 0 8px 26px;
+  border-bottom: 1px solid rgba(20,33,61,0.08);
+  font-size: 0.95rem;
+}
+.ticket-card.vip ul li { border-bottom-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); }
+.ticket-card ul li::before {
+  content: '★';
+  position: absolute; left: 0; top: 8px;
+  color: var(--orange);
+}
+.ticket-card.vip ul li::before { color: var(--yellow); }
+.ticket-card ul li:last-child { border-bottom: 0; }
+.ticket-card .cta { align-self: flex-start; }
+@media (max-width: 760px) { .ticket-tiers { grid-template-columns: 1fr; } }
