@@ -117,6 +117,12 @@
   .cta:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--navy); color: #fff; }
   .cta:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--navy); }
   .cta::after { display: none; }
+  /* Nav "Get Tickets" — bigger so it stands out */
+  .nav-links .cta {
+    padding: 14px 32px;
+    font-size: 1rem;
+    letter-spacing: 1.8px;
+  }
   .menu-toggle {
     display: none;
     background: none; border: 0; cursor: pointer; padding: 8px;
