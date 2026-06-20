@@ -209,8 +209,9 @@
     font-family: 'Caveat Brush', cursive;
     color: var(--red);
     font-size: 1.8rem;
-    margin-bottom: 6px;
-    display: inline-block;
+    margin: 0 auto 14px;
+    display: block;
+    width: fit-content;
     transform: rotate(-2deg);
     position: relative;
     padding: 0 18px;
