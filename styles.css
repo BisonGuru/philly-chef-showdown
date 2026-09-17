@@ -1619,3 +1619,114 @@
 .ticket-card ul li:last-child { border-bottom: 0; }
 .ticket-card .cta { align-self: flex-start; }
 @media (max-width: 760px) { .ticket-tiers { grid-template-columns: 1fr; } }
+
+/* ========= CURRENT SPONSORS ========= */
+.sponsors-band {
+  background: var(--cream-2);
+  padding: 70px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 4px solid var(--orange);
+  border-bottom: 4px solid var(--orange);
+}
+.sponsors-band::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url('food-pattern.svg');
+  background-size: 500px auto;
+  opacity: 0.08;
+  pointer-events: none;
+}
+.sponsors-band .container { position: relative; z-index: 3; }
+.sponsors-band .kicker {
+  font-family: 'Caveat Brush', cursive;
+  color: var(--red);
+  font-size: 1.8rem;
+  display: block;
+  width: fit-content;
+  margin: 0 auto 8px;
+  transform: rotate(-2deg);
+  padding: 0 18px;
+}
+.sponsors-band h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--navy);
+  text-align: center;
+  margin: 0 0 14px;
+  padding: 4px 30px;
+  display: block;
+  position: relative;
+}
+.sponsors-band h2::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 180' preserveAspectRatio='none'><path fill='%23F2A341' opacity='0.22' d='M30 90 Q 20 30 100 28 Q 220 14 320 30 Q 460 16 540 40 Q 590 70 560 110 Q 580 150 480 156 Q 360 170 240 158 Q 120 168 60 148 Q 10 130 30 90Z'/></svg>") center/60% 100% no-repeat;
+  z-index: -1;
+}
+.sponsors-band .subline {
+  text-align: center;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 auto 44px;
+  font-size: 1.02rem;
+}
+.sponsor-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.sponsor-card {
+  background: #fff;
+  border: 3px solid var(--navy);
+  border-radius: 18px;
+  padding: 26px 22px 22px;
+  box-shadow: 6px 6px 0 var(--navy);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; flex-direction: column;
+}
+.sponsor-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--navy); }
+.sponsor-card.on-dark { background: var(--navy); border-color: var(--orange); box-shadow: 6px 6px 0 var(--orange); }
+.sponsor-card.on-dark:hover { box-shadow: 9px 9px 0 var(--orange); }
+.sponsor-card .logo-frame {
+  flex: 1;
+  min-height: 140px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+.sponsor-card .logo-frame img {
+  max-width: 100%;
+  max-height: 130px;
+  height: auto;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.sponsor-card .sponsor-name {
+  font-family: 'Alfa Slab One', sans-serif;
+  color: var(--navy);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  margin: 0;
+}
+.sponsor-card.on-dark .sponsor-name { color: var(--yellow); }
+.sponsors-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+.sponsors-cta a {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--red);
+  font-weight: 700;
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 2px;
+  font-size: 0.98rem;
+}
+@media (max-width: 700px) {
+  .sponsor-logos { grid-template-columns: 1fr; max-width: 340px; }
+}
