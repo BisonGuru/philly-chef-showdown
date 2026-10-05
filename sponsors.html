@@ -24,6 +24,23 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=2171466109974802&ev=PageView&noscript=1"
 /></noscript>
+<!-- PCS Conversion Tracking -->
+<script>
+(function(){
+  // Fire InitiateCheckout when a user clicks any Zeffy ticket link
+  document.addEventListener('click', function(e) {
+    var link = e.target && e.target.closest ? e.target.closest('a[href*="zeffy.com"]') : null;
+    if (link && typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout', {
+        content_name: 'Philly Chef Showdown Tickets',
+        content_category: 'Event Ticket',
+        currency: 'USD'
+      });
+    }
+  }, true);
+})();
+</script>
+<!-- End PCS Conversion Tracking -->
 <!-- End Meta Pixel Code -->
 </head>
 <body>
@@ -335,6 +352,13 @@ src="https://www.facebook.com/tr?id=2171466109974802&ev=PageView&noscript=1"
       }
     });
   });
+  // Fire ViewContent for the Sponsors page
+  if (typeof fbq === 'function') {
+    fbq('track', 'ViewContent', {
+      content_name: 'Sponsors Page',
+      content_category: 'Sponsorship'
+    });
+  }
 </script>
 
 </body>

@@ -24,6 +24,23 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=2171466109974802&ev=PageView&noscript=1"
 /></noscript>
+<!-- PCS Conversion Tracking -->
+<script>
+(function(){
+  // Fire InitiateCheckout when a user clicks any Zeffy ticket link
+  document.addEventListener('click', function(e) {
+    var link = e.target && e.target.closest ? e.target.closest('a[href*="zeffy.com"]') : null;
+    if (link && typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout', {
+        content_name: 'Philly Chef Showdown Tickets',
+        content_category: 'Event Ticket',
+        currency: 'USD'
+      });
+    }
+  }, true);
+})();
+</script>
+<!-- End PCS Conversion Tracking -->
 <!-- End Meta Pixel Code -->
 </head>
 <body>
@@ -420,10 +437,23 @@ src="https://www.facebook.com/tr?id=2171466109974802&ev=PageView&noscript=1"
       <p style="font-family:'Caveat Brush',cursive;color:var(--orange);font-size:1.5rem;margin-top:18px;">Philly, what do you want to taste? — The MYB &amp; Katika Team</p>
     </div>
     <script>
-      // Reveal confirmation banner if redirected from submit.php
+      // Fire ViewContent for the Chef Registration page
+      if (typeof fbq === 'function') {
+        fbq('track', 'ViewContent', {
+          content_name: 'Chef Registration',
+          content_category: 'Registration'
+        });
+      }
+      // Reveal confirmation banner if redirected from submit.php — also fires Lead
       if (new URLSearchParams(window.location.search).get('status') === 'ok') {
         var t = document.getElementById('thanks');
         if (t) { t.hidden = false; setTimeout(function(){ t.scrollIntoView({behavior:'smooth'}); }, 80); }
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            content_name: 'Chef Registration Submission',
+            content_category: 'Registration'
+          });
+        }
       }
     </script>
   </div>
