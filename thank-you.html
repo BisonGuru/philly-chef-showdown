@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thank You for Voting — Philly Chef Showdown</title>
+<meta name="description" content="Thanks for voting in the Philly Chef Showdown!" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat+Brush&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=3" />
+<style>
+  html,body{overflow-x:hidden;}
+  .ty-hero{min-height:calc(100vh - 120px);display:flex;align-items:center;justify-content:center;padding:40px 20px 80px;position:relative;background:linear-gradient(180deg,#fff8ee 0%,#fff 100%);}
+  .ty-card{max-width:720px;width:100%;background:#fff;border:4px solid var(--navy);border-radius:32px;padding:60px 40px;text-align:center;box-shadow:10px 10px 0 var(--red);position:relative;z-index:2;}
+  .ty-check{width:120px;height:120px;background:var(--red);border-radius:50%;margin:0 auto 28px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:4rem;box-shadow:6px 6px 0 var(--navy);animation:pop .5s cubic-bezier(.3,1.5,.5,1);}
+  @keyframes pop{from{transform:scale(.3);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .ty-card h1{font-family:'Alfa Slab One',sans-serif;color:var(--navy);font-size:clamp(2.4rem,6vw,3.6rem);margin:0 0 16px;line-height:1;}
+  .ty-card .lead{font-size:1.3rem;color:#333;margin:0 0 10px;line-height:1.5;}
+  .ty-card .sub{color:#666;font-size:1.05rem;margin:0 0 36px;}
+  .ty-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+  .ty-ctas a{display:inline-block;padding:18px 32px;border-radius:14px;text-decoration:none;font-family:'Alfa Slab One',sans-serif;font-size:1.2rem;letter-spacing:.5px;transition:transform .1s;box-shadow:4px 4px 0 var(--navy);}
+  .ty-ctas a:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--navy);}
+  .ty-ctas .primary{background:var(--red);color:#fff;}
+  .ty-ctas .secondary{background:var(--orange);color:#fff;}
+  .ty-countdown{color:#999;font-size:.95rem;}
+  .ty-countdown b{color:var(--navy);}
+  .confetti{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:1;}
+  .confetti span{position:absolute;top:-20px;width:12px;height:12px;opacity:.85;animation:fall linear infinite;}
+  @keyframes fall{to{transform:translateY(100vh) rotate(720deg);}}
+</style>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2171466109974802');fbq('track','PageView');fbq('track','Lead',{content_name:'PCS Vote Confirmed'});</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Philly Chef Showdown home">
+      <img src="logo.png" alt="Philly Chef Showdown" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <span class="logo-fallback" style="display:none;"><span>PHILLY CHEF SHOWDOWN</span><span class="sm">★ CULINARY COMPETITION ★</span></span>
+    </a>
+    <button class="menu-toggle" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="america250.html">America 250</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/results" class="cta" style="background:var(--red);">★ LIVE RESULTS ★</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="ty-hero">
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="ty-card">
+    <div class="ty-check">✓</div>
+    <h1>Thank You for Voting!</h1>
+    <p class="lead">Your vote has been received. 🎉</p>
+    <p class="sub">The results are tallied live — watch the leaderboard update in real time as more guests weigh in.</p>
+    <div class="ty-ctas">
+      <a href="/results" class="primary">See Live Results →</a>
+      <a href="/" class="secondary">Back to Home</a>
+    </div>
+    <p class="ty-countdown">Returning you to the home page in <b id="countdown">8</b> seconds…</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="copyright">&copy; 2026 Philly Chef Showdown · Presented by Mom Your Business × Katika</div>
+  </div>
+</footer>
+
+<script>
+  // Nav
+  const btn=document.getElementById('menuBtn'),links=document.getElementById('navLinks');
+  btn&&btn.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o);btn.textContent=o?'✕':'☰';});
+
+  // Mark as voted so the modal doesn't nag on return visit
+  try{localStorage.setItem('pcs_voted','1');}catch(e){}
+  document.cookie='pcs_voted=1; path=/; max-age=86400';
+
+  // Confetti
+  (function(){
+    const el=document.getElementById('confetti');
+    const colors=['#F78F1E','#E63946','#14213D','#FFC857','#06AED5'];
+    for(let i=0;i<60;i++){
+      const s=document.createElement('span');
+      s.style.left=(Math.random()*100)+'%';
+      s.style.background=colors[Math.floor(Math.random()*colors.length)];
+      s.style.animationDuration=(3+Math.random()*4)+'s';
+      s.style.animationDelay=(Math.random()*2)+'s';
+      s.style.transform='rotate('+(Math.random()*360)+'deg)';
+      if(Math.random()>.5) s.style.borderRadius='50%';
+      el.appendChild(s);
+    }
+  })();
+
+  // Countdown + redirect
+  (function(){
+    let n=8;
+    const el=document.getElementById('countdown');
+    const timer=setInterval(function(){
+      n--; if(el) el.textContent=n;
+      if(n<=0){ clearInterval(timer); window.location.href='/'; }
+    },1000);
+    // Cancel the countdown if the user clicks either CTA
+    document.querySelectorAll('.ty-ctas a').forEach(a=>a.addEventListener('click',()=>clearInterval(timer)));
+  })();
+</script>
+
+</body>
+</html>
