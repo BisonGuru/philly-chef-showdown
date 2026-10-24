@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vote — Philly Chef Showdown</title>
+<meta name="description" content="Vote for your favorite chef at the Philly Chef Showdown Grand Finale." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat+Brush&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=3" />
+<style>
+  .vote-wrap{max-width:860px;margin:0 auto;padding:40px 20px 100px;}
+  .vote-card{background:#fff;border:3px solid var(--navy);border-radius:24px;padding:28px 24px;margin-bottom:28px;box-shadow:6px 6px 0 var(--navy);}
+  .vote-card h3{font-family:'Alfa Slab One',sans-serif;color:var(--navy);font-size:1.6rem;margin:0 0 6px;line-height:1.1;}
+  .vote-card .cat-sub{color:#555;font-size:.95rem;margin:0 0 18px;}
+  .opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border:2px solid #e4e4e4;border-radius:14px;margin-bottom:10px;cursor:pointer;transition:all .15s;background:#fafafa;}
+  .opt:hover{border-color:var(--orange);background:#fff8ee;}
+  .opt input{width:22px;height:22px;accent-color:var(--orange);cursor:pointer;}
+  .opt input:checked + span{font-weight:700;color:var(--navy);}
+  .opt:has(input:checked){border-color:var(--orange);background:#fff2dd;}
+  .opt span{font-size:1.05rem;color:#222;flex:1;}
+  .dish-input{width:100%;padding:16px 18px;font-size:1.1rem;border:2px solid #e4e4e4;border-radius:14px;font-family:inherit;background:#fafafa;}
+  .dish-input:focus{outline:none;border-color:var(--orange);background:#fff;}
+  .submit-btn{display:block;width:100%;background:var(--red);color:#fff;border:none;padding:22px;font-family:'Alfa Slab One',sans-serif;font-size:1.5rem;border-radius:18px;cursor:pointer;letter-spacing:.5px;box-shadow:4px 4px 0 var(--navy);transition:transform .1s;}
+  .submit-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--navy);}
+  .submit-btn:active{transform:translate(0,0);box-shadow:2px 2px 0 var(--navy);}
+  .vote-hero{text-align:center;padding:40px 20px 20px;}
+  .vote-hero h1{font-family:'Alfa Slab One',sans-serif;font-size:clamp(2.2rem,6vw,3.6rem);color:var(--navy);margin:0 0 10px;line-height:1;}
+  .vote-hero p{font-size:1.15rem;color:#444;max-width:640px;margin:0 auto;}
+  .thanks,.already,.closed{background:#fff;border:3px solid var(--navy);border-radius:24px;padding:40px 30px;text-align:center;margin:20px auto;max-width:640px;box-shadow:6px 6px 0 var(--navy);}
+  .thanks h2,.already h2,.closed h2{font-family:'Alfa Slab One',sans-serif;color:var(--red);font-size:2.2rem;margin:0 0 14px;}
+  .results-link{display:inline-block;margin-top:20px;background:var(--navy);color:#fff;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:700;letter-spacing:.5px;}
+  .error-msg{background:#ffe9e9;border:2px solid var(--red);color:var(--red);padding:14px 18px;border-radius:12px;margin-bottom:18px;font-weight:600;display:none;}
+  .error-msg.show{display:block;}
+</style>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2171466109974802');fbq('track','PageView');</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Philly Chef Showdown home">
+      <img src="logo.png" alt="Philly Chef Showdown" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <span class="logo-fallback" style="display:none;"><span>PHILLY CHEF SHOWDOWN</span><span class="sm">★ CULINARY COMPETITION ★</span></span>
+    </a>
+    <button class="menu-toggle" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/vote" class="cta" style="background:var(--red);">★ VOTE NOW ★</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="america250.html">America 250</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/results">Live Results</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="vote-hero">
+  <h1>Cast Your Vote!</h1>
+  <p>Pick your favorite in each category + name the single best dish you tasted. You can only vote once from this device, so make it count.</p>
+</section>
+
+<div class="vote-wrap">
+
+  <!-- ALREADY VOTED (shown via JS) -->
+  <div class="already" id="alreadyBox" style="display:none;">
+    <h2>You've already voted!</h2>
+    <p>Only one vote per device. Thanks for weighing in — results update live below.</p>
+    <a href="/results" class="results-link">See Live Results →</a>
+  </div>
+
+  <!-- THANKS (shown via query param) -->
+  <div class="thanks" id="thanksBox" style="display:none;">
+    <h2>Thanks for voting!</h2>
+    <p>Your pick is in. Results update live every few seconds.</p>
+    <a href="/results" class="results-link">See Live Results →</a>
+  </div>
+
+  <!-- DUPLICATE (shown via query param) -->
+  <div class="already" id="dupeBox" style="display:none;">
+    <h2>Already got your vote!</h2>
+    <p>Looks like this device has already voted. Only one vote per person.</p>
+    <a href="/results" class="results-link">See Live Results →</a>
+  </div>
+
+  <!-- FORM -->
+  <form id="voteForm" action="/vote-submit.php" method="POST" autocomplete="off">
+    <div class="error-msg" id="errMsg">Please make a selection in every category before submitting.</div>
+
+    <div class="vote-card">
+      <h3>🏆 Favorite Main Finalist</h3>
+      <p class="cat-sub">Pick one of our 8 competitors.</p>
+      <label class="opt"><input type="radio" name="main" value="Tiny Cakes" required><span>Tiny Cakes</span></label>
+      <label class="opt"><input type="radio" name="main" value="Delhi St Bakery"><span>Delhi St Bakery</span></label>
+      <label class="opt"><input type="radio" name="main" value="Duo Taco"><span>Duo Taco</span></label>
+      <label class="opt"><input type="radio" name="main" value="Gnocchi's"><span>Gnocchi's</span></label>
+      <label class="opt"><input type="radio" name="main" value="Parker Pastries"><span>Parker Pastries</span></label>
+      <label class="opt"><input type="radio" name="main" value="BB's Banana Pudding & More LLC"><span>BB's Banana Pudding &amp; More LLC</span></label>
+      <label class="opt"><input type="radio" name="main" value="Bohemian Blendz"><span>Bohemian Blendz</span></label>
+      <label class="opt"><input type="radio" name="main" value="StayConfident Kitchen"><span>StayConfident Kitchen</span></label>
+    </div>
+
+    <div class="vote-card">
+      <h3>🐟 Fish Hoagie Showdown</h3>
+      <p class="cat-sub">Who makes the better fish hoagie?</p>
+      <label class="opt"><input type="radio" name="fish" value="Jammin' J's (Meek's Treats)" required><span>Jammin' J's (Meek's Treats)</span></label>
+      <label class="opt"><input type="radio" name="fish" value="Lil Trent's"><span>Lil Trent's</span></label>
+    </div>
+
+    <div class="vote-card">
+      <h3>🌱 Vegan Showdown</h3>
+      <p class="cat-sub">Pick your favorite vegan dish.</p>
+      <label class="opt"><input type="radio" name="vegan" value="Royalty Vegan" required><span>Royalty Vegan</span></label>
+      <label class="opt"><input type="radio" name="vegan" value="Green Orchid Vegan Cuisine"><span>Green Orchid Vegan Cuisine</span></label>
+    </div>
+
+    <div class="vote-card">
+      <h3>✨ Favorite Dish of the Day</h3>
+      <p class="cat-sub">What single dish blew you away? (Any competitor, any item.)</p>
+      <input type="text" class="dish-input" name="dish" maxlength="140" placeholder="e.g. BB's banana pudding" required>
+    </div>
+
+    <!-- Hidden fingerprint fields filled by JS -->
+    <input type="hidden" name="fp" id="fp" value="">
+    <input type="hidden" name="screen" id="screen" value="">
+    <input type="hidden" name="tz" id="tz" value="">
+    <input type="hidden" name="lang" id="lang" value="">
+
+    <button type="submit" class="submit-btn">Submit My Vote →</button>
+  </form>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="copyright">&copy; 2026 Philly Chef Showdown · Presented by Mom Your Business × Katika</div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const btn=document.getElementById('menuBtn'),links=document.getElementById('navLinks');
+  btn&&btn.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o);btn.textContent=o?'✕':'☰';});
+
+  // Device fingerprint
+  function canvasHash(){
+    try{
+      const c=document.createElement('canvas');c.width=200;c.height=50;
+      const x=c.getContext('2d');x.textBaseline='top';x.font='14px Arial';
+      x.fillStyle='#f60';x.fillRect(0,0,100,50);
+      x.fillStyle='#069';x.fillText('PCS Fingerprint 🍴',2,10);
+      x.strokeStyle='rgba(102,204,0,0.7)';x.beginPath();x.arc(50,25,20,0,Math.PI*2);x.stroke();
+      const d=c.toDataURL();let h=0;for(let i=0;i<d.length;i++){h=((h<<5)-h)+d.charCodeAt(i);h|=0;}
+      return String(h);
+    }catch(e){return 'nc';}
+  }
+  async function fingerprint(){
+    const parts=[navigator.userAgent,navigator.language,screen.width+'x'+screen.height+'x'+screen.colorDepth,
+      new Date().getTimezoneOffset(),navigator.hardwareConcurrency||'',navigator.platform||'',canvasHash()];
+    const s=parts.join('|');
+    if(crypto&&crypto.subtle){
+      const b=new TextEncoder().encode(s);const h=await crypto.subtle.digest('SHA-256',b);
+      return Array.from(new Uint8Array(h)).map(x=>x.toString(16).padStart(2,'0')).join('');
+    }
+    let h=0;for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}
+    return String(h);
+  }
+
+  // Query params
+  const qp=new URLSearchParams(location.search);
+  const form=document.getElementById('voteForm'),thanks=document.getElementById('thanksBox'),
+    already=document.getElementById('alreadyBox'),dupe=document.getElementById('dupeBox');
+
+  (async function(){
+    // Fill fingerprint fields
+    document.getElementById('fp').value=await fingerprint();
+    document.getElementById('screen').value=screen.width+'x'+screen.height;
+    document.getElementById('tz').value=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
+    document.getElementById('lang').value=navigator.language||'';
+
+    // Show thanks / dupe banners
+    if(qp.get('status')==='ok'){
+      form.style.display='none';thanks.style.display='block';
+      try{localStorage.setItem('pcs_voted','1');}catch(e){}
+      document.cookie='pcs_voted=1; path=/; max-age=86400';
+      if(typeof fbq==='function')fbq('track','Lead',{content_name:'PCS Vote'});
+      return;
+    }
+    if(qp.get('status')==='dupe'){
+      form.style.display='none';dupe.style.display='block';
+      try{localStorage.setItem('pcs_voted','1');}catch(e){}
+      document.cookie='pcs_voted=1; path=/; max-age=86400';
+      return;
+    }
+
+    // Already-voted check (browser-side)
+    const voted=(()=>{try{return localStorage.getItem('pcs_voted')==='1';}catch(e){return false;}})()
+      || document.cookie.split(';').some(c=>c.trim().startsWith('pcs_voted=1'));
+    if(voted){form.style.display='none';already.style.display='block';}
+  })();
+
+  // Client-side validation (ensure all 3 radio groups have a pick + dish not empty)
+  form&&form.addEventListener('submit',function(e){
+    const req=['main','fish','vegan'];
+    const missing=req.filter(n=>!form.querySelector('input[name="'+n+'"]:checked'));
+    const dishEmpty=!form.querySelector('[name="dish"]').value.trim();
+    if(missing.length || dishEmpty){
+      e.preventDefault();
+      document.getElementById('errMsg').classList.add('show');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  });
+</script>
+
+</body>
+</html>
