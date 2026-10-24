@@ -74,9 +74,13 @@
 
   <!-- THANKS (shown via query param) -->
   <div class="thanks" id="thanksBox" style="display:none;">
-    <h2>Thanks for voting!</h2>
-    <p>Your pick is in. Results update live every few seconds.</p>
-    <a href="/results" class="results-link">See Live Results →</a>
+    <h2>🎉 Vote Received!</h2>
+    <p style="font-size:1.2rem;margin:12px 0 20px;">Thank you for voting in the Philly Chef Showdown.</p>
+    <p style="color:#666;">Taking you to the home page in <b id="countdown">6</b>…</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px;">
+      <a href="/results" class="results-link" style="background:var(--red);">See Live Results →</a>
+      <a href="/" class="results-link">Go to Home Now →</a>
+    </div>
   </div>
 
   <!-- DUPLICATE (shown via query param) -->
@@ -187,6 +191,12 @@
       try{localStorage.setItem('pcs_voted','1');}catch(e){}
       document.cookie='pcs_voted=1; path=/; max-age=86400';
       if(typeof fbq==='function')fbq('track','Lead',{content_name:'PCS Vote'});
+      // Auto-redirect to home after 6 seconds
+      var n=6, el=document.getElementById('countdown');
+      var timer=setInterval(function(){
+        n--; if(el) el.textContent=n;
+        if(n<=0){ clearInterval(timer); window.location.href='/'; }
+      }, 1000);
       return;
     }
     if(qp.get('status')==='dupe'){

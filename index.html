@@ -42,8 +42,50 @@ src="https://www.facebook.com/tr?id=2171466109974802&ev=PageView&noscript=1"
 </script>
 <!-- End PCS Conversion Tracking -->
 <!-- End Meta Pixel Code -->
+<style>
+  /* Live-vote announcement bar (above nav) */
+  .vote-bar{background:linear-gradient(90deg,var(--red),var(--orange));color:#fff;text-align:center;padding:14px 18px;font-weight:700;font-size:1.05rem;letter-spacing:.3px;}
+  .vote-bar a{color:#fff;background:var(--navy);padding:8px 18px;border-radius:30px;margin-left:12px;text-decoration:none;font-weight:800;letter-spacing:.5px;display:inline-block;}
+  .vote-bar a:hover{transform:scale(1.05);transition:transform .15s;}
+  @media (max-width:640px){
+    .vote-bar{font-size:.95rem;padding:12px;}
+    .vote-bar a{display:block;margin:10px auto 0;max-width:220px;}
+  }
+  /* Vote popup modal */
+  .vote-modal{position:fixed;inset:0;background:rgba(20,33,61,.75);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;animation:fadeIn .25s ease;}
+  .vote-modal.show{display:flex;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  .vote-modal-card{background:#fff;border:4px solid var(--navy);border-radius:28px;padding:40px 32px;max-width:520px;width:100%;text-align:center;box-shadow:10px 10px 0 var(--red);position:relative;animation:pop .35s cubic-bezier(.3,1.5,.5,1);}
+  @keyframes pop{from{transform:scale(.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .vote-modal-card .close{position:absolute;top:14px;right:16px;background:transparent;border:none;font-size:1.8rem;color:#999;cursor:pointer;line-height:1;padding:4px 10px;}
+  .vote-modal-card .close:hover{color:var(--red);}
+  .vote-modal-card .em{font-size:3.5rem;margin:0 0 10px;}
+  .vote-modal-card h2{font-family:'Alfa Slab One',sans-serif;color:var(--navy);font-size:2.2rem;margin:0 0 10px;line-height:1.05;}
+  .vote-modal-card .sub{color:#444;font-size:1.1rem;margin:0 0 24px;}
+  .vote-modal-card .cta{display:block;background:var(--red);color:#fff;padding:20px;border-radius:14px;font-family:'Alfa Slab One',sans-serif;font-size:1.5rem;text-decoration:none;letter-spacing:.5px;box-shadow:4px 4px 0 var(--navy);transition:transform .1s;}
+  .vote-modal-card .cta:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--navy);}
+  .vote-modal-card .later{display:inline-block;margin-top:16px;color:#777;text-decoration:underline;background:none;border:none;cursor:pointer;font-size:.95rem;font-family:inherit;}
+</style>
 </head>
 <body>
+
+<!-- ====== LIVE VOTE BAR ====== -->
+<div class="vote-bar" id="voteBar">
+  🏆 TODAY: Vote for your favorite chef &amp; dish!
+  <a href="/vote">★ VOTE NOW ★</a>
+</div>
+
+<!-- ====== VOTE POPUP MODAL ====== -->
+<div class="vote-modal" id="voteModal" role="dialog" aria-labelledby="vmTitle">
+  <div class="vote-modal-card">
+    <button class="close" id="vmClose" aria-label="Close">×</button>
+    <div class="em">🏆🍴</div>
+    <h2 id="vmTitle">Go Vote for Your Favorite Dish!</h2>
+    <p class="sub">The Showdown is live — pick your favorite chef in each category and name the best dish you tasted today.</p>
+    <a href="/vote" class="cta">★ VOTE NOW ★</a>
+    <button class="later" id="vmLater">Maybe later</button>
+  </div>
+</div>
 
 <!-- ====== NAV ====== -->
 <nav class="nav">
@@ -564,6 +606,19 @@ src="https://www.facebook.com/tr?id=2171466109974802&ev=PageView&noscript=1"
 </footer>
 
 <script>
+  // Vote popup: show on load unless already voted or dismissed this session
+  (function(){
+    var modal=document.getElementById('voteModal');
+    var voted=false;
+    try{ voted = localStorage.getItem('pcs_voted')==='1' || sessionStorage.getItem('pcs_vote_dismissed')==='1'; }catch(e){}
+    if(document.cookie.split(';').some(function(c){return c.trim().startsWith('pcs_voted=1');})) voted=true;
+    if(!voted){ setTimeout(function(){ modal.classList.add('show'); }, 1200); }
+    function hide(){ modal.classList.remove('show'); try{sessionStorage.setItem('pcs_vote_dismissed','1');}catch(e){} }
+    document.getElementById('vmClose').addEventListener('click', hide);
+    document.getElementById('vmLater').addEventListener('click', hide);
+    modal.addEventListener('click', function(e){ if(e.target===modal) hide(); });
+  })();
+
   const btn = document.getElementById('menuBtn');
   const links = document.getElementById('navLinks');
   btn.addEventListener('click', () => {
